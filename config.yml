@@ -1,52 +1,40 @@
 --- 
-config: 
-  - 
-    playbook: 
-      location: /home/runtest.yml
-      params: version=3.7
-  - 
-    script: 
+config:
+  - playbook:
+      location: /home/runtest.yml 
+      params: "version=3.7"
+  - script: 
       location: /home/runtest.sh
-      params: test=1
+      params: "test=1"
 infra: 
-  baremetal: 
-    - 
+  cloud:
+  - type: aws
+    count: 4
+  - type: openstack  
+    count: 2
+  baremetal:
+    - type: duffy
       count: 5
-      type: duffy
-    - 
+    - type: beaker
       count: 2
-      type: beaker
-  cloud: 
-    - 
-      count: 4
-      type: aws
-    - 
-      count: 2
-      type: openstack
-  container: 
-    count: 3
-    name: mysql
-    type: docker
+  container:
+      count: 3
+      name: mysql
+      type: docker
 logging: 
   format: plaintext
   level: 3
-reporting: 
-  - 
-    datahub: false
-  - 
-    resultsDB: false
-testing: 
-  - 
-    playbook: 
-      location: /home/runtest.yml
-      output: 
-        - 
-          format: xUnit
-      params: version=3.7
-  - 
-    script: 
+reporting:
+  - datahub:
+  - resultsDB:
+testing:
+  - playbook:
+      location: /home/runtest.yml 
+      params: "version=3.7"
+      output:
+       - format: xUnit
+  - script: 
       location: /home/runtest.sh
-      output: 
-        - 
-          format: none
-      params: test=1
+      params: "test=1"
+      output:
+       - format: none
