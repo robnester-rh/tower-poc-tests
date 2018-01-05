@@ -1,41 +1,41 @@
 --- 
 config:
   - playbook:
-      location: /home/runtest.yml 
+      location: '/home/runtest.yml'
       params: 'version=3.7'
   - script: 
-      location: /home/runtest.sh
+      location: '/home/runtest.sh'
       params: 'test=1'
 infra: 
   cloud:
-  - type: aws
+  - type: 'aws'
     count: 4
-  - type: openstack  
+  - type: 'openstack'
     count: 2
   baremetal:
-    - type: duffy
+    - type: 'duffy'
       count: 5
-    - type: beaker
+    - type: 'beaker'
       count: 2
   container:
       count: 3
-      name: mysql
-      type: docker
-logging: 
-  format: plaintext
+      name: 'mysql'
+      type: 'docker'
+logging:
+  format: 'plaintext'
   level: 3
 reporting:
-  - datahub:
-  - resultsDB:
+  - datahub: false
+  - resultsDB: false
 testing:
   - playbook:
-      location: /home/runtest.yml 
+      location: '/home/runtest.yml'
       params: 'version=3.7'
       output:
-       - format: xUnit
+       - format: 'xUnit'
   - script: 
-      location: /home/runtest.sh
+      location: '/home/runtest.sh'
       params: 'test=1'
       output:
-       - format: none
+       - format: 'none'
 
